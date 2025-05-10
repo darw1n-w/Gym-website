@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        DARWIN FITNESS
+    </title>
+    <link rel="stylesheet" href="style gym.css">
+</head>
+<body class="calculator">
+    <header>
+        <nav><ul>
+            <img src="IMAGES/LOGO.PNG"style="width:67px;height35px;border-radius:25px;align-self: center;">
+            <li><a href="GYM.Html">Homepage</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="Routines.html">Routines</a></li>
+            <li><a href="Cal Tracker.html">Cal calculator</a></li>
+            <li class="progress"><a href=".html">My progress</a></li></ul>
+        </nav>
+    </header>
+    <h1>Calorie Calculator</h1>
+    <form id="calorieForm">
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" required><br>
+
+        <label for="weight">Weight (kg):</label><br>
+        <input type="number" id="weight" name="weight" required><br>
+
+        <label for="height">Height (cm):</label><br>
+        <input type="number" id="height" name="height" required><br>
+
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select><br>
+
+        <label for="activity">Activity Level:</label><br>
+        <select id="activity" name="activity" required>
+            <option value="1.2">Sedentary</option>
+            <option value="1.375">Light Activity</option>
+            <option value="1.55">Moderate Activity</option>
+            <option value="1.725">Active</option>
+            <option value="1.9">Very Active</option>
+        </select><br>
+
+        <button type="button" onclick="calculateCalories()">Calculate</button>
+    </form>
+
+    <h2 id="result"></h2>
+
+    <script>
+        function calculateCalories() {
+            const age = document.getElementById("age").value;
+            const weight = document.getElementById("weight").value;
+            const height = document.getElementById("height").value;
+            const gender = document.getElementById("gender").value;
+            const activity = document.getElementById("activity").value;
+
+            if (!age || !weight || !height || !activity) {
+                alert("Please fill in all fields.");
+                return;
+            }
+
+            let bmr;
+
+            // Calculate Basal Metabolic Rate (BMR)
+            if (gender === "male") {
+                bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+            } else {
+                bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+            }
+
+            // Calculate Total Daily Calorie Needs
+            const totalCalories = bmr * activity;
+
+            document.getElementById("result").innerText = 
+                `Your daily calorie requirement is approximately ${Math.round(totalCalories)} calories.`;
+        }
+    </script>
+</body>
+</html>
